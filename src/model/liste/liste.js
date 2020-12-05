@@ -1,13 +1,13 @@
 const DAO = require('../../lib/dao')
 const mySQLWrapper = require('../../lib/mysqlWrapper')
 
-class User extends DAO {
+class Liste extends DAO {
 
     /**
      * Overrides TABLE_NAME with this class' backing table at MySQL
      */
     static get TABLE_NAME() {
-        return 'User'
+        return 'Liste'
     }
 
     /**
@@ -31,21 +31,21 @@ class User extends DAO {
         })
     }
 
+
+    
+
     /**
      * Creates a new bacon
      */
-    static async createEntry(_, {username, userpasswort, thema, kreiert, letzterlogin, sprache, barrieremodus}) {
+    static async createEntry(_, {listenname, listenpasswort, icon, letzteredit}) {
         const connection = await mySQLWrapper.getConnectionFromPool()
         try {
             let _result = await this.insert(connection, {
                 data: {
-                    username,
-                    userpasswort,
-                    thema,
-                    kreiert,
-                    letzterlogin,
-                    sprache,
-                    barrieremodus
+                    listenname,
+                    listenpasswort,
+                    icon,
+                    letzteredit
                 }
             })
 
@@ -59,23 +59,20 @@ class User extends DAO {
     /**
      * Updates a bacon 
      */
-    static async updateEntry(_, {id, username, userpasswort, thema, kreiert, letzterlogin, sprache, barrieremodus}) {
+    static async updateEntry(_, {id, listenname, listenpasswort, icon, letzteredit}) {
         const connection = await mySQLWrapper.getConnectionFromPool()
         try {
 
             await this.update(connection, {
                 id,
                 data: {
-                    username,
-                    userpasswort,
-                    thema,
-                    kreiert,
-                    letzterlogin,
-                    sprache,
-                    barrieremodus
+                    id,
+                    listenname,
+                    listenpasswort,
+                    icon,
+                    letzteredit
                 }
             })
-
             return this.getByID(_, {id})
         } finally {
             // Releases the connection
@@ -100,4 +97,4 @@ class User extends DAO {
     }
 }
 
-module.exports = User
+module.exports = Liste

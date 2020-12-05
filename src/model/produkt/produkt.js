@@ -1,13 +1,13 @@
 const DAO = require('../../lib/dao')
 const mySQLWrapper = require('../../lib/mysqlWrapper')
 
-class User extends DAO {
+class Produkt extends DAO {
 
     /**
      * Overrides TABLE_NAME with this class' backing table at MySQL
      */
     static get TABLE_NAME() {
-        return 'User'
+        return 'Produkt'
     }
 
     /**
@@ -34,18 +34,20 @@ class User extends DAO {
     /**
      * Creates a new bacon
      */
-    static async createEntry(_, {username, userpasswort, thema, kreiert, letzterlogin, sprache, barrieremodus}) {
+    static async createEntry(_, {produktcode, produktname, gewicht, einheit, menge, produkticon, kategorie, mindesthaltbarkeit, bemerkung}) {
         const connection = await mySQLWrapper.getConnectionFromPool()
         try {
             let _result = await this.insert(connection, {
                 data: {
-                    username,
-                    userpasswort,
-                    thema,
-                    kreiert,
-                    letzterlogin,
-                    sprache,
-                    barrieremodus
+                    produktcode,
+                    produktname,
+                    gewicht,
+                    einheit,
+                    menge,
+                    produkticon,
+                    kategorie,
+                    mindesthaltbarkeit,
+                    bemerkung
                 }
             })
 
@@ -59,20 +61,22 @@ class User extends DAO {
     /**
      * Updates a bacon 
      */
-    static async updateEntry(_, {id, username, userpasswort, thema, kreiert, letzterlogin, sprache, barrieremodus}) {
+    static async updateEntry(_, {id, produktcode, produktname, gewicht, einheit, menge, produkticon, kategorie, mindesthaltbarkeit, bemerkung}) {
         const connection = await mySQLWrapper.getConnectionFromPool()
         try {
 
             await this.update(connection, {
                 id,
                 data: {
-                    username,
-                    userpasswort,
-                    thema,
-                    kreiert,
-                    letzterlogin,
-                    sprache,
-                    barrieremodus
+                    produktcode,
+                    produktname,
+                    gewicht,
+                    einheit,
+                    menge,
+                    produkticon,
+                    kategorie,
+                    mindesthaltbarkeit,
+                    bemerkung
                 }
             })
 
@@ -100,4 +104,4 @@ class User extends DAO {
     }
 }
 
-module.exports = User
+module.exports = Produkt

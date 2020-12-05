@@ -46,5 +46,12 @@ module.exports = {
             barrieremodus: { type: new GraphQLNonNull(GraphQLInt) }
         },
         resolve: User.updateEntry.bind(User)
+    },
+    deleteUser: {
+        type,
+        args: {
+            id:     { type: GraphQLID },
+        },
+        resolve: User.deleteEntry.bind(User)
     }
 }

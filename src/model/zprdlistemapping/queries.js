@@ -5,30 +5,30 @@ const { GraphQLList,
         GraphQLInt } = require('graphql')
 const type = require('./type')
 const mutation = require('./mutations')
-const ZGruppenuserMapping = require("./zgrpusermapping")
+const ZProduktlisteMapping = require("./zprdlistemapping")
 
 // Defines the queries
 module.exports = {
-    zgrpusermappings: {
+    zprdlistemappings: {
         type: new GraphQLList(type),
         args: {
-            gruppeid: {
+            produktid: {
                 type: GraphQLID
             },
-            userid: {
+            listeid: {
                 type: GraphQLID
             }
         },
-        resolve: ZGruppenuserMapping.findMatching.bind(ZGruppenuserMapping)
+        resolve: ZProduktlisteMapping.findMatching.bind(ZProduktlisteMapping)
     },
-    zgrpusermapping: {
+    zprdlistemapping: {
         type,
         args: {
             id: {
                 type: GraphQLID
             }
         },
-        resolve: ZGruppenuserMapping.getByID.bind(ZGruppenuserMapping)
+        resolve: ZProduktlisteMapping.getByID.bind(ZProduktlisteMapping)
     }
 }
 

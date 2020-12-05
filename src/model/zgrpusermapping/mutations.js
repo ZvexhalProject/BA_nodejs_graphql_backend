@@ -6,7 +6,7 @@ const {
     GraphQLFloat,
     GraphQLInt
 } = require('graphql')
-const type = require('./type').default
+const type = require('./type')
 const ZGruppenuserMapping = require('./zgrpusermapping')
 
 // Defines the mutations
@@ -22,9 +22,17 @@ module.exports = {
     updatezgrpusermapping: {
         type,
         args: {
-            gruppeid:   { type: GraphQLID },
+            id:   {type: GraphQLID},
+            gruppeid:   {type: GraphQLID},
             userid:   {type: GraphQLID}
         },
         resolve: ZGruppenuserMapping.updateEntry.bind(ZGruppenuserMapping)
+    },
+    deletezgrpusermapping: {
+        type,
+        args: {
+            id:     { type: GraphQLID },
+        },
+        resolve: ZGruppenuserMapping.deleteEntry.bind(ZGruppenuserMapping)
     }
 }

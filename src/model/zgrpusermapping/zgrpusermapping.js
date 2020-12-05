@@ -99,6 +99,22 @@ class ZGruppenuserMapping extends DAO {
             if (connection != null) connection.release()
         }
     }
+
+    static async deleteEntry(_, {id}) {
+        const connection = await mySQLWrapper.getConnectionFromPool()
+        try {
+            let deleted = await this.getByID(_, {id: id});
+           // console.log({id});
+            await this.delete(connection, {id: deleted.id})
+            return deleted;      
+        } catch (e){
+            throw e;
+        }
+        finally {
+            // Releases the connection
+            if (connection != null) connection.release()
+        }
+    }
 }
 
 module.exports = ZGruppenuserMapping
