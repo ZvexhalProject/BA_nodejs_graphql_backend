@@ -53,7 +53,6 @@ class ZProduktlisteMapping extends DAO {
         } else {
                 list.liste = await Liste.getByID(_,{id:list.listeid})
                 list.produkt = await Gruppe.getByID(_,{id:list.produktid})
-
         }
         return list;
     }
