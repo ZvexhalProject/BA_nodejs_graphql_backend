@@ -12,6 +12,10 @@ module.exports = class Routes {
         if (app == null) throw new Error("You must provide an instance of express")
 
         //Registers the base GraphQLi base endpoint
+        app.use('/graphql', function(req, res, next){
+            console.log("Neuer Request: " + Date.now());
+            next();
+        })
         app.use('/graphql', graphql)
     }
 

@@ -24,7 +24,7 @@ module.exports = {
             produkticon: { type: new GraphQLNonNull(GraphQLInt) },
             kategorie: { type: new GraphQLNonNull(GraphQLString) },
             mindesthaltbarkeit: { type: GraphQLString },
-            bemerkung: { type: new GraphQLNonNull(GraphQLString) },
+            bemerkung: { type: GraphQLString},
         },
         resolve: Produkt.createEntry.bind(Produkt)
     },

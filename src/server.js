@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const Routes = require('./routes')
+const cors = require('cors');
 const env = require('dotenv').config()
 const expressPlayground = require('graphql-playground-middleware-express').default
 
@@ -32,6 +33,25 @@ class App {
      * 
      */
     applyMiddleware() {
+        // Add headers
+        this.expressApp.use(function (req, res, next) {
+
+            // Website you wish to allow to connect
+            res.setHeader('Access-Control-Allow-Origin', '*');
+
+            // Request methods you wish to allow
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+            // Request headers you wish to allow
+            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+            // Set to true if you need the website to include cookies in the requests sent
+            // to the API (e.g. in case you use sessions)
+            res.setHeader('Access-Control-Allow-Credentials', true);
+
+            // Pass to next layer of middleware
+            next();
+        });
         //Allows the server to parse json
         this.expressApp.use(bodyParser.json())
         this.expressApp.get('/playground', expressPlayground({ endpoint: '/graphql' }))
